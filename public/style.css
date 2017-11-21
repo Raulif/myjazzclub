@@ -54,6 +54,68 @@ body {
     padding-top: 10px;
 }
 
+/*#admin-login-btn {
+    margin: 0;
+    padding: 0;
+    width: 10%;
+    height: 20%;
+    top: 40px;
+}*/
+
+.footer-wrapper {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 15vh;
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#contact-info-wrapper {
+    width: 40%;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    margin-left: 2%;
+}
+
+.contact-info {
+    margin: 0;
+    padding: 0;
+}
+
+.admin-login-wrapper {
+    margin: auto;
+    display: block;
+    text-align: center;
+}
+
+.admin-login-btn {
+    width: 8%;
+    margin-right: 1%;
+    border: 1px solid grey;
+    border-radius: 3px;
+    text-decoration: none;
+    color: grey;
+    font-size: 80%;
+}
+
+.admin-login-btn:hover{
+    background-color: grey;
+    color: black;
+}
+
+.admin-login-btn p {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    text-align: center;
+}
+
 #shows-list {
     margin: 0;
     padding: 0;
@@ -61,7 +123,7 @@ body {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    margin-left: 5%;
+    margin-left: 2%;
 }
 
 .show-list--list-item {
@@ -81,7 +143,38 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
 
+.show-editor--wrapper {
+    width: 45%;
+    height: 100vh;
+    border: 1px black solid;
+    display: inline-flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+#admin-shows-container {
+    width: 45%;
+    height: auto;
+    border: 1px blue solid;
+    float: right;
+
+}
+
+#admin-show-list {
+    padding: 0;
+    margin: 0;
+    display: inline-flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+#admin-shows-container li {
+    width: 100%;
+    height: 100px;
+    list-style: none;
+    border: 1px green dotted;
 }
 
 

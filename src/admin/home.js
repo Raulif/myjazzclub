@@ -1,43 +1,40 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router';
-import Navbar from '../navbar/navbar'
 import axios from 'axios';
+import { Link } from 'react-router';
+import { connect } from 'react-redux';
 import { getAllCurrentShows } from '../actions/actions';
-import ShowsContainer from '../shows-list/shows-container';
-import Footer from '../footer/footer'
 
-
-class App extends React.Component {
+class AdminHome extends React.Component {
     constructor(props) {
         super(props)
     }
 
     componentDidMount() {
-        this.props.getAllCurrentShows()
+        this.props.getAllCurrentShows();
+
     }
 
     render() {
+
         if(!this.props.shows) {
             return (
                 <div>LOADING SHOWS</div>
             )
         }
 
-        return (
+        return(
             <div>
-                <Navbar />
-                <ShowsContainer shows={this.props.shows}/>
-                <Footer />
+                <div>In admin</div>
+                
+                {this.props.children}
             </div>
         )
     }
 }
 
-
 const mapDispatchToProps = dispatch => {
     return({
-        getAllCurrentShows: () => dispatch(getAllCurrentShows())
+        getAllCurrentShows: () => dispatch(getAllCurrentShows()),
     })
 }
 
@@ -47,4 +44,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(AdminHome)

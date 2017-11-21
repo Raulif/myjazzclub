@@ -6,6 +6,18 @@ export default function(state = {}, action) {
         })
     }
 
+    if(action.type == 'GET_CURRENT_SHOW') {
+        state = Object.assign({}, state, {
+            currentShow: action.currentShow
+        })
+    }
+
+    if(action.type == 'SET_CURRENT_SHOW') {
+        state = Object.assign({}, state, {
+            currentShow: action.currentShow
+        })
+    }
+
     return state;
 }
 
