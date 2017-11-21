@@ -13,8 +13,33 @@ export default function(state = {}, action) {
     }
 
     if(action.type == 'SET_CURRENT_SHOW') {
+
         state = Object.assign({}, state, {
             currentShow: action.currentShow
+        })
+        console.log('action.currentShow in reducer is: ', action.currentShow);
+
+    }
+
+    if(action.type == 'CURRENT_SHOW_FIELD_CHANGE') {
+        state = Object.assign({}, state, {
+            currentShow: Object.assign({}, state.currentShow, {
+                [action.field]: action.value
+            })
+        })
+    }
+
+    if(action.type == 'EMPTY_CURRENT_SHOW') {
+        state = Object.assign({}, state, {
+            currentShow: action.emptyShow
+            })
+
+        console.log('state after we empty everything: ',state );
+    }
+
+    if(action.type == 'ADD_SHOW_TO_PROPS') {
+        state = Object.assign({}, state, {
+            shows: [...state.shows, action.currentShow]
         })
     }
 

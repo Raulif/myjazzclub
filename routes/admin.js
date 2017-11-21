@@ -38,14 +38,14 @@ router.get('/current-show', (req, res) => {
 
 router.post('/new-show', (req, res) => {
 
-    let newShow = req.body;
-
+    const newShow = req.body;
     return db.createNewShow(newShow)
 
             .then(result => {
 
                 if(result.success) {
                     newShow.id = result.id
+                    console.log('newShow in post new show is: ', newShow);
                     res.json({
                         success: true,
                         newShow
@@ -66,7 +66,7 @@ router.post('/update-show', (req, res) => {
             .then( result => {
 
                 if(result.success) {
-                    console.log('updatedShow in update query is: ', updatedShow);
+
                     res.json({
                         success: true,
                         updatedShow

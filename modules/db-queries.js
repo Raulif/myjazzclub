@@ -102,8 +102,9 @@ module.exports.createNewShow = (newShow) => {
                         time_end,
                         price_pre,
                         price_door,
-                        tag )
-                    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
+                        tag,
+                        picture_name)
+                    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
                     RETURNING id`
 
     const params = Object.keys(newShow).map((keyName, keyIndex) => {
@@ -117,15 +118,14 @@ module.exports.createNewShow = (newShow) => {
     return db.query(query, params)
 
             .then(results => {
-
                 if(results.rowCount < 1) {
-                    return({
-                        success: false,
-                        id
-                    })
+                    return({success: false})
                 }
 
-                return({success: true})
+                return({
+                    success: true,
+                    id: results.rows[0].id
+                })
             })
             .catch(err => console.log('error on // DB-QUERIES // QUERY CREATE NEW SHOW: ', err))
 }

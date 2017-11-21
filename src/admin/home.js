@@ -23,9 +23,9 @@ class AdminHome extends React.Component {
         }
 
         return(
-            <div>
-                <div>In admin</div>
-                
+            <div className='admin-home'>
+                <div>ADMIN DASHBOARD</div>
+
                 {this.props.children}
             </div>
         )
