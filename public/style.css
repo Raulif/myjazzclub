@@ -165,12 +165,15 @@ body {
     object-fit: cover;
 }
 
+#admin-shows--dropdown {
+    float: right;
+}
+
 #admin-shows-container {
     width: 45%;
     height: auto;
     border: 1px blue solid;
     float: right;
-
 }
 
 #admin-show-list {
@@ -180,10 +183,10 @@ body {
     flex-direction: column;
     flex-wrap: wrap;
     overflow-y: scroll;
+    width: 100%;
 }
 
 #admin-shows-container li {
-    width: auto;
     min-height: 50px;
     max-height: 100px;
     height: auto;
@@ -191,12 +194,110 @@ body {
     border: 1px green dotted;
     cursor: pointer;
     padding: 10px;
-
 }
 
 .admin-home {
     background-color: #A5B5C6;
+    height: 100%;
 }
+
+.picture-uploader--wrapper {
+    border: 1px dotted red;
+}
+
+.picture-uploader--file-field {
+    color: #a51e72;
+    font-size: 45px;
+    position: absolute;
+    background-color: white;
+    width: 60%;
+    border-radius: 10px;
+}
+
+.picture-uploader--upload-btn {
+
+}
+
+.picture-uploader--hidden-field {
+    position: relative;
+    z-index: 2;
+    opacity: 0;
+}
+
+#gallery--wrapper {
+    width: 60%;
+    float: right;
+    display: inline-block;
+}
+
+#gallery-manager--wrapper {
+    width: 100%;
+    height: 100vh;
+    background-color: black;
+    color: white;
+}
+
+#gallery--list {
+    padding: 0;
+    margin: 0;
+    display: inline-flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+    width: 100%;
+
+}
+
+#gallery--list li {
+    width: 32%;
+    height: 200px;
+    list-style: none;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.gallery--list-item p {
+    padding: 0;
+    margin: 0;
+    font-size: 15px;
+}
+
+.gallery--img-wrapper {
+    width: 100%;
+    height: 80%;
+}
+
+.gallery--img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.gallery-editor--wrapper {
+    height: 100%;
+    width: 35%;
+    float: left;
+    display: inline-block;
+}
+
+.gallery-editor {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.gallery-editor--img-preview-wrapper {
+    width: 100%;
+    height: 80%;
+}
+
+.gallery-editor--img-preview {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+
 
 /*display: grid;
 grid-template-columns: 1fr 7fr 1fr;

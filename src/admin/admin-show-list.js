@@ -12,7 +12,6 @@ export default function AdminShowList(props){
         let show_date = show.show_date.slice(0, 10)
 
         const clickHandler = (e) => {
-            console.log('e.currentTarget', e.currentTarget);
             console.log(show);
             props.setCurrentShow(show)
         }
@@ -20,15 +19,16 @@ export default function AdminShowList(props){
 
         return(
             <li key={id} className='admin-list--list-item' onClick={(e) => clickHandler(e)}>
-                <div className='admin-list--show-date'>{show_date}</div>
-                <div className='admin-list--show-title'>{title}</div>
-                <div className='admin-list--show-main-artist'>{main_artist}</div>
+                <div className='admin-list--show-date'>Show date:     {show_date}</div>
+                <div className='admin-list--show-title'>Show Title:     {title}</div>
+                <div className='admin-list--show-main-artist'>Main Artist:     {main_artist}</div>
             </li>
         )
     })
 
     return(
         <ul id='admin-show-list'>
+
             {listOfShows}
         </ul>
 

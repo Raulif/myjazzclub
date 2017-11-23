@@ -16,7 +16,7 @@ export default function ShowsList(props){
             picture_name,
         } = show
         let show_date = show.show_date.slice(0, 10)
-        let pictureUrl = './uploads/'
+        let pictureUrl = 'https://s3.amazonaws.com/myjazzclubbucket/'
 
         return(
             <li key={id} className='show-list--list-item'>

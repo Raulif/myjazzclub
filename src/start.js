@@ -11,6 +11,7 @@ import logger from 'redux-logger';
 import AdminLogin from './admin/login';
 import AdminHome from './admin/home';
 import ShowEditor from './admin/show-editor';
+import GalleryManager from './admin/gallery-manager/gallery-manager';
 
 
 export const store = createStore(reducer, composeWithDevTools(applyMiddleware(reduxPromise, logger)));

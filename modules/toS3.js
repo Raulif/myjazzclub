@@ -1,4 +1,5 @@
 const knox = require('knox');
+
 let secrets;
 if (process.env.NODE_ENV == 'production') {
     secrets = process.env; // in prod the secrets are environment variables
@@ -8,7 +9,7 @@ if (process.env.NODE_ENV == 'production') {
 const client = knox.createClient({
     key: secrets.awsKey,
     secret: secrets.awsSecret,
-    bucket: 'raulsbucket3'
+    bucket: 'myjazzclubbucket'
 });
 
 //IAM user: raulsbucketuser
@@ -26,6 +27,7 @@ function sendToS3(fileObj) {
         readStream.pipe(s3Request);
 
         s3Request.on('response', s3Response => {
+            console.log('tos3 response: ',s3Response.statusCode);
             const wasSuccessful = s3Response.statusCode == 200;
             if (wasSuccessful) {
                 resolve()

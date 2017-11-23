@@ -1,15 +1,13 @@
 import React from 'react';
-import axios from 'axios';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import { getCurrentShow, setCurrentShow, alterCurrentShow, emptyCurrentShow, createNewShow, updateShow, addShowToProps } from '../actions/actions';
+import { updateStateWithPictureName,updateCurrentShowWithPictureName, getCurrentShow, setCurrentShow, alterCurrentShow, emptyCurrentShow, createNewShow, updateShow, addShowToProps } from '../actions/actions';
 import AdminShowListContainer from './admin-show-list-container';
-
-
+import PictureUploader from '../../modules/picture-uploader';
 
 class ShowEditor extends React.Component {
     constructor(props){
-        super(props)
+        super(props);
         this.submit = this.submit.bind(this);
         this.inputHandler = this.inputHandler.bind(this);
     }
@@ -42,11 +40,12 @@ class ShowEditor extends React.Component {
             price_pre: this.props.currentShow.price_pre || '',
             price_door: this.props.currentShow.price_door || '',
             tag: this.props.currentShow.tag || '',
-            picture_name: ''
+            picture_name: this.props.currentShow.picture_name || ''
         }
 
         if(!this.props.currentShow.id) {
             console.log('we are posting NEW show');
+            delete showInfo.picture_name
             this.props.createNewShow(showInfo);
             this.props.addShowToProps(this.props.currentShow)
         }
@@ -68,15 +67,15 @@ class ShowEditor extends React.Component {
             )
         }
 
-        let pictureUrl = './uploads/'
+        let pictureUrl = 'https://s3.amazonaws.com/myjazzclubbucket/'
 
         return (
             <div>
-                <div name='showeditor' className='show-editor--wrapper'>
+
                 <h1>SHOW EDITOR</h1>
 
-                    <button onClick={ (e) => this.clickHandlerEmptyForm(e)}>Clear form</button>
-
+                <button onClick={ (e) => this.clickHandlerEmptyForm(e)}>Clear form</button>
+                <div name='showeditor' className='show-editor--wrapper'>
                     <p className='show-editor--field-label'>Show Title</p>
                     <textarea type='text' name='title' placeholder='show-title' onChange={e => this.inputHandler(e)} value={this.props.currentShow.title}/>
                     <p className='show-editor--field-label'>Main Artist</p>
@@ -106,7 +105,7 @@ class ShowEditor extends React.Component {
 
 
                     <button onClick={ () => this.submit() }>Submit!</button>
-
+                    <PictureUploader updateCurrentShowWithPictureName={this.props.updateCurrentShowWithPictureName} updateStateWithPictureName={this.props.updateStateWithPictureName} currentShowId={this.props.currentShow.id}/>
                     <div className='show-editor--img-wrapper'>
                         <img className='show-editor--img' src={`${pictureUrl}${this.props.currentShow.picture_name}`}/>
                     </div>
@@ -125,7 +124,9 @@ const mapDispatchToProps = (dispatch, currentShow, field, value, showInfo) => {
         alterCurrentShow: (field, value) => dispatch(alterCurrentShow(field, value)),
         createNewShow: (showInfo) => dispatch(createNewShow(showInfo)),
         updateShow: (showInfo) => dispatch(updateShow(showInfo)),
-        addShowToProps: (currentShow) => dispatch(addShowToProps(currentShow))
+        addShowToProps: (currentShow) => dispatch(addShowToProps(currentShow)),
+        updateCurrentShowWithPictureName: (picture_name) => dispatch(updateCurrentShowWithPictureName(picture_name)),
+        updateStateWithPictureName: (picture_name, showId) => dispatch(updateStateWithPictureName(picture_name, showId))
     })
 }
 
@@ -137,6 +138,3 @@ const mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShowEditor)
-
-// name="firstname" onChange={e => this.inputHandler(e)}
-// <textarea type="text" name="lastname" onChange={e => this.inputHandler(e)} placeholder="last name"/>

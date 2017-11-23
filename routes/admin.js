@@ -4,6 +4,29 @@ const bodyParser = require('body-parser');
 const cookieSession = require('cookie-session');
 const session = require('express-session');
 const path = require('path');
+const multer = require('multer')
+const uidSafe = require('uid-safe')
+const toS3 = require('../modules/toS3').toS3;
+
+
+let diskStorage = multer.diskStorage({
+    destination: function (req, file, callback) {
+        callback(null,__dirname + '/../uploads/');
+    },
+    filename: function (req, file, callback) {
+      uidSafe(24).then(function(uid) {
+          callback(null, uid + path.extname(file.originalname));
+      });
+    }
+});
+
+let uploader = multer({
+    storage: diskStorage,
+    limits: {
+        fileSize: 6000000
+    }
+});
+
 
 
 //FILTER NOT LOGGED IN
@@ -34,7 +57,7 @@ router.get('/current-show', (req, res) => {
 })
 
 
-// POST NEW SHOW TO DB
+// POST NEW SHOW TO SHOWS TABLE
 
 router.post('/new-show', (req, res) => {
 
@@ -42,10 +65,9 @@ router.post('/new-show', (req, res) => {
     return db.createNewShow(newShow)
 
             .then(result => {
-
+                console.log('result at new show: ', result);
                 if(result.success) {
                     newShow.id = result.id
-                    console.log('newShow in post new show is: ', newShow);
                     res.json({
                         success: true,
                         newShow
@@ -56,6 +78,20 @@ router.post('/new-show', (req, res) => {
 
             .catch(err => console.log('error on ROUTES // ADMIN // POST NEW SHOW: ', err))
 })
+
+
+//POST NEW PICTURE TO GALLERY TABLE
+
+// router.post('/gallery/new-picture', (req, res) => {
+//
+//     const newPicture = req.body
+//
+//     return db.createNewPicture(newPicture)
+// })
+
+
+
+//POST UPDATE EXISTING SHOW
 
 router.post('/update-show', (req, res) => {
 
@@ -77,10 +113,118 @@ router.post('/update-show', (req, res) => {
             .catch(err => console.log('error on ROUTES // ADMIN // UPDATE SHOW: ', err))
 })
 
-//
-// router.post('/upload-picture/:id', (req, res) => {
-//
-// })
+
+//POST UPDATE CURRENT PICTURE
+
+router.post('/gallery/update-picture', (req, res) => {
+    const updatedPicture = req.body;
+
+    return db.updatePicture(updatedPicture)
+
+            .then(result => {
+                if(result.success) {
+                    res.json({
+                        success: true,
+                        updatedPicture
+                    })
+                }
+            })
+            .catch(err => console.log('error on ROUTES // ADMIN // UPDATE PICTURE: ', err))
+})
 
 
-module.exports = router
+
+// POST UPLOAD NEW SHOW PICTURE
+
+router.post('/upload-picture/:currentShowId', uploader.single('file'), (req, res) => {
+    const currentShowId = req.params.currentShowId
+    console.log('req.file: ', req.file);
+    if(req.file) {
+        toS3(req.file)
+
+        .then(() => {
+            return db.uploadPicture(req.file.filename, currentShowId)
+
+            .then(results => {
+                if(results.success) {
+                    res.json({
+                        success: true,
+                        picture_name: req.file.filename
+                    })
+                }
+
+            })
+            .catch(err => console.log('error on ROUTES // ADMIN // DB UPLOAD-PICTURE: ', err))
+        })
+        .catch(err => console.log('error on ROUTES // ADMIN // TOS3 UPLOAD PICTURE: ', err))
+
+    }
+
+})
+
+//POST UPLOAD NEW GALLERY PICTURE
+
+router.post('/gallery/upload-new-picture', uploader.single('file'), (req, res) => {
+    if(req.file) {
+        console.log('req.file: ', req.file);
+        toS3(req.file)
+
+        .then(() => {
+            return db.createNewGalleryPicture(req.file.filename)
+
+            .then(results => {
+                if(results.success) {
+                    res.json({
+                        success: true,
+                        id: results.id,
+                        file_name: req.file.filename
+                    })
+                }
+            })
+            .catch(err => console.log('error on ROUTES // ADMIN // DB CREATE NEW GALLERY PICTURE: ', err))
+        })
+        .catch(err => console.log('error on ROUTES // ADMIN // TOS3 UPLOAD NEW GALLERY PICTURE: ', err))
+    }
+})
+
+
+// GET ALL PICTURES FROM DB
+
+router.get('/get-pictures', (req, res) => {
+
+    return db.getPictures()
+
+            .then( results => {
+                if(results.success) {
+
+                    res.json({
+                        success: true,
+                        pictures: results.pictures
+                    })
+                }
+            })
+
+            .catch(err => console.log('error on ROUTES // ADMIN // GET PICTURES: ', err))
+})
+
+
+// GET CURRENT PICTURE FROM DB
+
+router.get('/current-picture', (req, res) => {
+
+    return db.getCurrentPicture()
+
+            .then( results => {
+                if(results.success) {
+
+                    res.json({
+                        success: true,
+                        currentPicture: results.currentPicture
+                    })
+                }
+            })
+
+            .catch(err => console.log('error on ROUTES // ADMIN // GET CURRENT PICTURE: ', err))
+})
+
+module.exports = router;
