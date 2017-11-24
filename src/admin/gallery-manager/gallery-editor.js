@@ -64,37 +64,46 @@ class GalleryEditor extends React.Component {
         return(
             <div>
                 <div className='gallery-editor--wrapper'>
-                    <h2>EDITOR</h2>
 
-                    <div className='gallery-editor'>
-                    {!this.props.currentPicture.id &&
-                    <div>
-                        <div>No picture selected</div>
-                        <PictureUploader setCurrentPictureToState={this.setCurrentPictureToState} />
-                    </div>}
+                <div className='gallery-editor'>
+                {!this.props.currentPicture.id &&
+                <div>
+                    <div className='gallery-editor--fallback'>No picture selected</div>
+                    <PictureUploader setCurrentPictureToState={this.setCurrentPictureToState} />
+                </div>}
+
 
                     {this.props.currentPicture.id &&
                         <div>
-                        <button onClick={ () => this.clickHandlerEmptyForm()}>New picture</button>
-                        <div className='gallery-editor--img-preview-wrapper'>
-                            <img className='gallery-editor--img-preview' src={`${pictureUrl}${this.props.currentPicture.file_name}`}/>
+                        <h1 className='gallery-editor--title'>EDITOR</h1>
+
+                            <button className='gallery-editor--new-pic-btn' onClick={ () => this.clickHandlerEmptyForm()}>New picture</button>
+                            <div className='gallery-editor--img-preview-wrapper'>
+                                <img className='gallery-editor--img-preview' src={`${pictureUrl}${this.props.currentPicture.file_name}`}/>
+                            </div>
+
+
+                        <div className='gallery-editor--field-label-container'>
+                        <p className='gallery-editor--field-label'>File name:</p>
+                        <div type='text' className='gallery-editor--field-value'>{this.props.currentPicture.file_name}</div>
                         </div>
 
-
-
-                        <p className='gallery-editor--field-label'>File name:</p>
-                        <div type='text' id='file-name'>{this.props.currentPicture.file_name}</div>
-
+                        <div className='gallery-editor--field-label-container'>
                         <p className='gallery-editor--field-label'>Title:</p>
-                        <textarea type='text' name='title' placeholder='picture title' onChange={e => this.inputHandler(e)} value={this.props.currentPicture.title} />
+                        <textarea className='gallery-editor--field-value' type='text' name='title' placeholder='picture title' onChange={e => this.inputHandler(e)} value={this.props.currentPicture.title} />
+                        </div>
 
-                        <p className='gallery-editor--field-label'>Description:</p>
-                        <textarea type='text' name='description' placeholder='picture description' onChange={e => this.inputHandler(e)} value={this.props.currentPicture.description}/>
+                        <div className='gallery-editor--field-label-container-description'>
+                        <p className='gallery-editor--field-label-description'>Description:</p>
+                        <textarea className='gallery-editor--field-value-description' type='text' name='description' placeholder='picture description' onChange={e => this.inputHandler(e)} value={this.props.currentPicture.description}/>
+                        </div>
 
+                        <div className='gallery-editor--field-label-container'>
                         <p className='gallery-editor--field-label'>Date:</p>
-                        <textarea type='text' name='picture_date' placeholder='date' onChange={e => this.inputHandler(e)} value={this.props.currentPicture.picture_date} />
+                        <textarea className='gallery-editor--field-value' type='text' name='picture_date' placeholder='date' onChange={e => this.inputHandler(e)} value={this.props.currentPicture.picture_date} />
+                        </div>
 
-                        <button onClick={ () => this.submit() }>Submit!</button>
+                        <button className='gallery-editor--new-pic-btn submit-btn' onClick={ () => this.submit() }>UPLOAD</button>
                         </div>}
                     </div>
                 </div>

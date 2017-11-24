@@ -1,0 +1,64 @@
+
+.admin-home {
+    height: 100%;
+    color: #E6E4DB;
+}
+
+.admin-home--header {
+    background-color: #0D0628;
+    height: 100px;
+    display: flex;
+    align-items: center;
+}
+
+.admin-home--title {
+    font-size: 30px;
+    font-weight: 300;
+    margin-left: 20px;
+    display: inline-block;
+    margin-right: 50px;
+}
+
+
+.editor-toggler-btn {
+    height: 35px;
+    display: inline-block;
+    width: 220px;
+    border-radius: 6px;
+    outline: none;
+    cursor: pointer;
+
+}
+
+.editor-toggler-btn:hover {
+    opacity: 0.9;
+    font-weight: bold;
+    transform: scale(1.1);
+}
+
+.logged-in {
+    position: absolute;
+    right: 0;
+    margin-right: 30px;
+}
+
+.logged-in--name {
+    margin-left: 5px;
+    font-family: 'Averia Serif Libre', cursive;
+    font-size: 15px;
+    font-weight: 100;
+}
+
+/*display: grid;
+grid-template-columns: 1fr 7fr 1fr;
+grid-template-rows: 75px 200px 400px;
+grid-auto-flow: row;
+grid-auto-rows: 400px;*/
+
+/*linear-gradient(to bottom, #ffffff 0%, #f8f7f5 100%);*/
+
+
+/*
+font-family: 'Source Sans Pro', sans-serif;
+font-family: 'Averia Serif Libre', cursive;
+*/

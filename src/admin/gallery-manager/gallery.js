@@ -19,8 +19,14 @@ export default function Gallery(props) {
                 <div className='gallery--img-wrapper'>
                     <img className='gallery--img' src={`${pictureUrl}${file_name}`}/>
                 </div>
-                <p className='gallery--picture-title'>Title: {title}</p>
-                <p className='gallery--picture-date'>Date: {picture_date}</p>
+
+                <div className='gallery-item--text-container'>
+                    <p className='gallery-item--text-label'>Title:</p><p className='gallery-item--text-value'>{title}</p>
+                </div>
+
+                <div className='gallery-item--text-container'>
+                    <p className='gallery-item--text-label'>Date:</p><p className='gallery-item--text-value'>{picture_date}</p>
+                </div>
             </li>
         )
 
@@ -28,7 +34,7 @@ export default function Gallery(props) {
 
     return(
         <div id='gallery--wrapper'>
-            <h2>GALLERY</h2>
+            <h1 className='gallery-manager--gallery-list-title'>GALLERY OF PICTURES</h1>
             <ul id='gallery--list'>
                 {listOfPictures}
             </ul>

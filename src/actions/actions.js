@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+
+
 export function getAllCurrentShows() {
 
     return axios.get('/api/shows')
@@ -103,21 +105,11 @@ export function emptyCurrentPicture() {
 }
 
 export function createNewShow(showInfo) {
-
-    return axios.post('/admin/new-show', showInfo )
-
-    .then( ({data}) => {
-        if(data.success) {
-            //In order to update state.currentShow we use the 'newShow' returned from the server inside the 'data' obj, instead of the 'showInfo' we passed to the server with the POST query. Reason for this is, the 'newShow' returned from the server after the query includes property 'id' as created by the DB when inserting the new row.
-            console.log('data.newShow: ', data.newShow);
-            return {
-                type: 'SET_CURRENT_SHOW',
-                currentShow: data.newShow
-            }
-        }
-    })
-
-    .catch(err => console.log('error on // ACTIONS // QUERY POST NEW SHOW: ',err));
+    console.log('inside action createNewShow: ', showInfo);
+    return {
+        type: 'SET_CURRENT_SHOW',
+        currentShow: showInfo
+    }
 }
 
 export function createNewPicture(pictureInfo) {
@@ -171,6 +163,8 @@ export function updatePicture(pictureInfo) {
 
 
 export function addShowToProps(currentShow) {
+    console.log('inside action addShowToProps: ', currentShow);
+
     return {
         type: 'ADD_SHOW_TO_PROPS',
         currentShow

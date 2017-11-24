@@ -13,7 +13,6 @@ import AdminHome from './admin/home';
 import ShowEditor from './admin/show-editor';
 import GalleryManager from './admin/gallery-manager/gallery-manager';
 
-
 export const store = createStore(reducer, composeWithDevTools(applyMiddleware(reduxPromise, logger)));
 
 const visitorRouter = (
@@ -28,9 +27,7 @@ const visitorRouter = (
 const adminRouter = (
     <Provider store={store}>
         <Router history={browserHistory}>
-            <Route path='/admin' component={AdminHome}>
-                <IndexRoute component={ShowEditor}/>
-            </Route>
+            <Route path='/admin' component={AdminHome}/>
         </Router>
     </Provider>
 )

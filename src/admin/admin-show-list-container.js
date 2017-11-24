@@ -1,5 +1,7 @@
 import React from 'react'
-import AdminShowList from './admin-show-list'
+import AdminShowList from './admin-show-list';
+import { Dropdown } from 'semantic-ui-react';
+
 
 export default class AdminShowListContainer extends React.Component {
     constructor(props) {
@@ -12,7 +14,7 @@ export default class AdminShowListContainer extends React.Component {
     }
 
     render() {
-        if(!this.props.shows){
+        if(!this.props.shows|| !this.props.currentShow ){
             return (
                 <div>LOADING LIST OF SHOWS</div>
             )
@@ -37,20 +39,23 @@ export default class AdminShowListContainer extends React.Component {
 
 
         return(
+
             <div id='admin-shows-container'>
                 <div id='admin-shows-container-title'>
                     <h1>LIST OF SHOWS</h1>
+
+                    <p className='admin-shows--current-selection'>Total shows: <span className='filter-results'>{this.props.shows.length}</span></p>
                     {this.state.selectedMonth !== '' &&
-                    <p>Total amount of shows: {this.props.shows.length}</p>}
-                    <p>Shows in the selected period: {finalArray.length}</p>
-                    <select id='admin-shows--dropdown' onChange={(e) => this.changeHandler(e)}>
+                    <p className='admin-shows--current-selection'>Shows in selection: <span  className='filter-results'>{finalArray.length}</span></p>}
+                    <p className='admin-shows--filter-label'>Filter shows:</p>
+                    <select className='admin-shows--dropdown' onChange={(e) => this.changeHandler(e)}>
                         <option value=''>All</option>
                         <option value='2017-11'>Nov '17</option>
                         <option value='2017-12'>Dec '17</option>
                         <option value='2018-01'>Jan '18</option>
                     </select>
                 </div>
-                <AdminShowList shows={finalArray} setCurrentShow={this.props.setCurrentShow}/>
+                <AdminShowList currentShow={this.props.currentShow} shows={finalArray} setCurrentShow={this.props.setCurrentShow}/>
 
             </div>
         )

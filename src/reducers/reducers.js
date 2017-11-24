@@ -17,8 +17,6 @@ export default function(state = {}, action) {
         state = Object.assign({}, state, {
             currentShow: action.currentShow
         })
-        console.log('action.currentShow in reducer is: ', action.currentShow);
-
     }
 
     if(action.type == 'CURRENT_SHOW_FIELD_CHANGE') {

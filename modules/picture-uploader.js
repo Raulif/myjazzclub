@@ -21,7 +21,7 @@ export default class PictureUploader extends React.Component {
         .then(({data}) => {
             console.log('data: ', data);
             if(data.success) {
-                
+
                 console.log('data on picture-upload: ', data);
                 const showId = this.props.currentShowId;
                 const picture_name = data.picture_name;
@@ -38,11 +38,13 @@ export default class PictureUploader extends React.Component {
             return null
         } else {
             return (
-                <div className='picture-uploader--wrapper'>
-                    <label className='upload-label' htmlFor='file'>Upload a new picture:</label>
-                    <input className='file-field' type='file' id='file' onChange={e => this.inputHandler(e)}/>
-                    <input className='picture-uploader--hidden-field' type='file'/>
-                    <button type='submit' className='picture-uploader--upload-btn' id='upload-button' name='button' onClick={() => this.submit()} >UPLOAD</button>
+                <div className='picture-uploader-wrapper'>
+                    <div className='picture-uploader'>
+                        <label className='upload-label' htmlFor='file'>Attach a picture:</label>
+                        <input className='file-field' type='file' id='file' onChange={e => this.inputHandler(e)}/>
+                        <input className='picture-uploader--hidden-field' type='file'/>
+                    </div>
+                    <button type='submit' className='picture-uploader--upload-btn' name='button' onClick={() => this.submit()} >upload picture</button>
                 </div>
             )
         }

@@ -40,22 +40,34 @@ class GalleryManager extends React.Component {
         }
 
         return(
-            <div id='gallery-manager'>
-                <h1>GALLERY MANAGER</h1>
+            <div>
+                <div className='gallery-manager'>
+                <div className='gallery-manager--header'>
 
-                {this.state.selectedMonth !== '' &&
-                <p>Total amount of pictures: {this.props.pictures.length}</p>}
-                <p>Pictures in the selected period: {arrayOfPictures.length}</p>
-                <select id='admin-shows--dropdown' onChange={(e) => this.changeHandler(e)}>
-                    <option value=''>All</option>
-                    <option value='2017-08'>Aug '17</option>
-                    <option value='2017-09'>Sep '17</option>
-                    <option value='2017-10'>Oct '17</option>
-                    <option value='2017-11'>Nov '17</option>
-                </select>
 
-                <Gallery pictures={arrayOfPictures} setCurrentPicture={this.props.setCurrentPicture} />
-                <GalleryEditor />
+                        <div className='gallery-manager--current-selection'>
+                            <p className='gallery-manager--filter-label'>Total amount of pictures: </p><p className='gallery-manager--filter-results'>{arrayOfPictures.length}</p>
+                        </div>
+
+                        {this.state.selectedMonth !== '' &&
+                        <div className='gallery-manager--current-selection'>
+                            <p className='gallery-manager--filter-label'>Pictures in the period selected: </p>
+                            <p className='gallery-manager--filter-results'>{this.props.pictures.length}</p>
+                        </div>}
+
+                        <select className='gallery-manager--dropdown' onChange={(e) => this.changeHandler(e)}>
+                            <option value=''>All</option>
+                            <option value='2017-08'>Aug '17</option>
+                            <option value='2017-09'>Sep '17</option>
+                            <option value='2017-10'>Oct '17</option>
+                            <option value='2017-11'>Nov '17</option>
+                        </select>
+                    </div>
+                    <div className='gallery-manager--workspace'>
+                        <GalleryEditor />
+                        <Gallery pictures={arrayOfPictures} setCurrentPicture={this.props.setCurrentPicture} />
+                    </div>
+                </div>
             </div>
 
         )

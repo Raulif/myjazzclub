@@ -1,9 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import { updateStateWithPictureName,updateCurrentShowWithPictureName, getCurrentShow, setCurrentShow, alterCurrentShow, emptyCurrentShow, createNewShow, updateShow, addShowToProps } from '../actions/actions';
+import { updateStateWithPictureName,updateCurrentShowWithPictureName, getCurrentShow, setCurrentShow, alterCurrentShow, emptyCurrentShow, updateShow, addShowToProps } from '../actions/actions';
+import {postNewShow} from '../utils/ajax'
 import AdminShowListContainer from './admin-show-list-container';
 import PictureUploader from '../../modules/picture-uploader';
+import { Input, Divider, Form, Label } from 'semantic-ui-react'
+
+
 
 class ShowEditor extends React.Component {
     constructor(props){
@@ -46,8 +50,7 @@ class ShowEditor extends React.Component {
         if(!this.props.currentShow.id) {
             console.log('we are posting NEW show');
             delete showInfo.picture_name
-            this.props.createNewShow(showInfo);
-            this.props.addShowToProps(this.props.currentShow)
+            postNewShow(showInfo)
         }
 
         else {
@@ -71,46 +74,75 @@ class ShowEditor extends React.Component {
 
         return (
             <div>
+                <div className='show-editor--main-wrapper'>
 
-                <h1>SHOW EDITOR</h1>
+                    <div name='showeditor' className='show-editor--wrapper'>
 
-                <button onClick={ (e) => this.clickHandlerEmptyForm(e)}>Clear form</button>
-                <div name='showeditor' className='show-editor--wrapper'>
-                    <p className='show-editor--field-label'>Show Title</p>
-                    <textarea type='text' name='title' placeholder='show-title' onChange={e => this.inputHandler(e)} value={this.props.currentShow.title}/>
-                    <p className='show-editor--field-label'>Main Artist</p>
-                    <textarea type='text' name='main_artist' placeholder='main-artist' onChange={e => this.inputHandler(e)} value={this.props.currentShow.main_artist}/>
-                    <p className='show-editor--field-label'>Secondary Artist</p>
-                    <textarea type='text' name='secondary_artist' placeholder='secondary-artist' onChange={e => this.inputHandler(e)} value={this.props.currentShow.secondary_artist}/>
-                    <p className='show-editor--field-label'>Line Up</p>
-                    <textarea type='text' name='line_up' placeholder='line-up' onChange={e => this.inputHandler(e)} value={this.props.currentShow.line_up}/>
-                    <p className='show-editor--field-label'>Genre</p>
-                    <textarea type='text' name='genre' placeholder='genre' onChange={e => this.inputHandler(e)} value={this.props.currentShow.genre}/>
-                    <p className='show-editor--field-label'>Long Description</p>
-                    <textarea type='text' name='long_description' placeholder='long-description' onChange={e => this.inputHandler(e)} value={this.props.currentShow.long_description}/>
-                    <p className='show-editor--field-label'>External Link</p>
-                    <textarea type='text' name='external_link' placeholder='external-link' onChange={e => this.inputHandler(e)} value={this.props.currentShow.external_link}/>
-                    <p className='show-editor--field-label'>Show Date</p>
-                    <textarea type='text' name='show_date' placeholder='show-date: YYYY-MM-DD' onChange={e => this.inputHandler(e)} value={this.props.currentShow.show_date}/>
-                    <p className='show-editor--field-label'>Time Begin</p>
-                    <textarea type='text' name='time_begin' placeholder='time_begin' onChange={e => this.inputHandler(e)} value={this.props.currentShow.time_begin}/>
-                    <p className='show-editor--field-label'>Time End</p>
-                    <textarea type='text' name='time_end' placeholder='time_end' onChange={e => this.inputHandler(e)} value={this.props.currentShow.time_end}/>
-                    <p className='show-editor--field-label'>Price Pre</p>
-                    <textarea type='text' name='price_pre' placeholder='price-pre' onChange={e => this.inputHandler(e)} value={this.props.currentShow.price_pre}/>
-                    <p className='show-editor--field-label'>Price Door</p>
-                    <textarea type='text' name='price_door' placeholder='price-door' onChange={e => this.inputHandler(e)} value={this.props.currentShow.price_door}/>
-                    <p className='show-editor--field-label'>Tag</p>
-                    <textarea type='text' name='tag' placeholder='tag' onChange={e => this.inputHandler(e)} value={this.props.currentShow.tag}/>
+                        <h1 className='show-editor--main-title'>SHOW EDITOR</h1>
+                        <button className='show-editor--clear-btn' onClick={ (e) => this.clickHandlerEmptyForm(e)}>New show</button>
+
+                        <div className='show-editor--textarea-wrapper'>
 
 
-                    <button onClick={ () => this.submit() }>Submit!</button>
-                    <PictureUploader updateCurrentShowWithPictureName={this.props.updateCurrentShowWithPictureName} updateStateWithPictureName={this.props.updateStateWithPictureName} currentShowId={this.props.currentShow.id}/>
-                    <div className='show-editor--img-wrapper'>
-                        <img className='show-editor--img' src={`${pictureUrl}${this.props.currentShow.picture_name}`}/>
+                        <p className='show-editor--field-label'>Show Title</p>
+                        <textarea type='text' name='title' className='show-editor--textarea title' placeholder='show-title' onChange={e => this.inputHandler(e)} value={this.props.currentShow.title}/>
+
+                        <p className='show-editor--field-label p-main-artist'>Main Artist</p>
+                        <p className='show-editor--field-label p-secondary-artist'>Secondary Artist</p>
+
+                        <textarea type='text' name='main_artist' className='show-editor--textarea main-artist' placeholder='main artist' onChange={e => this.inputHandler(e)} value={this.props.currentShow.main_artist}/>
+
+                        <textarea type='text' name='secondary_artist' className='show-editor--textarea secondary-artist' placeholder='secondary artist' onChange={e => this.inputHandler(e)} value={this.props.currentShow.secondary_artist}/>
+
+                        <p className='show-editor--field-label'>Line Up</p>
+                        <textarea type='text' name='line_up' className='show-editor--textarea line-up' placeholder='line up' onChange={e => this.inputHandler(e)} value={this.props.currentShow.line_up}/>
+
+                        <p className='show-editor--field-label'> Show description</p>
+                        <textarea type='text' name='long_description' className='show-editor--textarea description' placeholder='show description' onChange={e => this.inputHandler(e)} value={this.props.currentShow.long_description}/>
+
+
+                        <p className='show-editor--field-label p-link'>External Link</p>
+                        <p className='show-editor--field-label p-genre'>Genre</p>
+
+                        <textarea type='text' name='external_link' className='show-editor--textarea external-link' placeholder='external link' onChange={e => this.inputHandler(e)} value={this.props.currentShow.external_link}/>
+
+
+                        <textarea type='text' name='genre' className='show-editor--textarea genre' placeholder='genre' onChange={e => this.inputHandler(e)} value={this.props.currentShow.genre}/>
+
+                        <p className='show-editor--field-label p-date'>Show Date</p>
+                        <p className='show-editor--field-label p-begin'>Time Begin</p>
+                        <p className='show-editor--field-label p-end'>Time End</p>
+
+                        <textarea type='text' name='show_date' className='show-editor--textarea date' placeholder='YYYY-MM-DD' onChange={e => this.inputHandler(e)} value={this.props.currentShow.show_date}/>
+
+                        <textarea type='text' name='time_begin' className='show-editor--textarea time-begin' placeholder='time begin' onChange={e => this.inputHandler(e)} value={this.props.currentShow.time_begin}/>
+
+                        <textarea type='text' name='time_end' className='show-editor--textarea time-end' placeholder='time end' onChange={e => this.inputHandler(e)} value={this.props.currentShow.time_end}/>
+
+                        <p className='show-editor--field-label p-pre'>Price pre sale</p>
+
+                        <p className='show-editor--field-label p-img'>Show picture</p>
+
+                        <textarea type='text' name='price_pre' className='show-editor--textarea price-pre' placeholder='price pre' onChange={e => this.inputHandler(e)} value={this.props.currentShow.price_pre}/>
+
+                        <div className='show-editor--img-wrapper'>
+                            <img className='show-editor--img' src={`${pictureUrl}${this.props.currentShow.picture_name}`} />
+                        </div>
+
+                        <p className='show-editor--field-label p-door'>Price at door</p>
+                        <textarea type='text' name='price_door' className='show-editor--textarea price-door' placeholder='price door' onChange={e => this.inputHandler(e)} value={this.props.currentShow.price_door}/>
+
+                        <p className='show-editor--field-label p-tag'>Tag</p>
+                        <textarea type='text' name='tag' className='show-editor--textarea tag' placeholder='tag' onChange={e => this.inputHandler(e)} value={this.props.currentShow.tag}/>
+
+
+
+                        <PictureUploader className='show-editor--picture-uploader' updateCurrentShowWithPictureName={this.props.updateCurrentShowWithPictureName} updateStateWithPictureName={this.props.updateStateWithPictureName} currentShowId={this.props.currentShow.id}/>
+                        <button className='show-editor--submit-btn' onClick={ () => this.submit() }>SUBMIT</button>
                     </div>
                 </div>
-                <AdminShowListContainer setCurrentShow={this.props.setCurrentShow} shows={this.props.shows}/>
+                <AdminShowListContainer currentShow={this.props.currentShow} setCurrentShow={this.props.setCurrentShow} shows={this.props.shows}/>
+                </div>
             </div>
         )
     }
@@ -122,9 +154,8 @@ const mapDispatchToProps = (dispatch, currentShow, field, value, showInfo) => {
         setCurrentShow: (currentShow) => dispatch(setCurrentShow(currentShow)),
         emptyCurrentShow: (currentShow) => dispatch(emptyCurrentShow(currentShow)),
         alterCurrentShow: (field, value) => dispatch(alterCurrentShow(field, value)),
-        createNewShow: (showInfo) => dispatch(createNewShow(showInfo)),
         updateShow: (showInfo) => dispatch(updateShow(showInfo)),
-        addShowToProps: (currentShow) => dispatch(addShowToProps(currentShow)),
+        addShowToProps: () => dispatch(addShowToProps()),
         updateCurrentShowWithPictureName: (picture_name) => dispatch(updateCurrentShowWithPictureName(picture_name)),
         updateStateWithPictureName: (picture_name, showId) => dispatch(updateStateWithPictureName(picture_name, showId))
     })
