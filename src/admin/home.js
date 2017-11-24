@@ -12,8 +12,8 @@ class AdminHome extends React.Component {
     constructor(props) {
         super(props)
         this.state= {
-            shows: false,
-            gallery: true,
+            shows: true,
+            gallery: false,
             buttonText: 'Go to GALLERY MANAGER'
 
         }

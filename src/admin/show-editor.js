@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import { updateStateWithPictureName,updateCurrentShowWithPictureName, getCurrentShow, setCurrentShow, alterCurrentShow, emptyCurrentShow, updateShow, addShowToProps } from '../actions/actions';
+import { updateStateWithPictureName,updateCurrentShowWithPictureName, getCurrentShow, setCurrentShow, alterCurrentShow, emptyCurrentShow, updateShow, updateStateWithShow } from '../actions/actions';
 import {postNewShow} from '../utils/ajax'
 import AdminShowListContainer from './admin-show-list-container';
 import PictureUploader from '../../modules/picture-uploader';
@@ -57,6 +57,7 @@ class ShowEditor extends React.Component {
             console.log('we are UPDATING show');
             showInfo.id = this.props.currentShow.id;
             this.props.updateShow(showInfo)
+            this.props.updateStateWithShow(showInfo)
         }
 
     }
@@ -155,7 +156,7 @@ const mapDispatchToProps = (dispatch, currentShow, field, value, showInfo) => {
         emptyCurrentShow: (currentShow) => dispatch(emptyCurrentShow(currentShow)),
         alterCurrentShow: (field, value) => dispatch(alterCurrentShow(field, value)),
         updateShow: (showInfo) => dispatch(updateShow(showInfo)),
-        addShowToProps: () => dispatch(addShowToProps()),
+        updateStateWithShow: (showInfo) => dispatch(updateStateWithShow(showInfo)),
         updateCurrentShowWithPictureName: (picture_name) => dispatch(updateCurrentShowWithPictureName(picture_name)),
         updateStateWithPictureName: (picture_name, showId) => dispatch(updateStateWithPictureName(picture_name, showId))
     })

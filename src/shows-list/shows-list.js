@@ -20,7 +20,7 @@ export default function ShowsList(props){
 
         return(
             <li key={id} className='show-list--list-item'>
-                <Link to={`/shows/${title}`} style={{textDecoration: 'none', color: 'black'}}>
+                <Link to={`/shows/${id}`} style={{textDecoration: 'none', color: 'black'}}>
                     <div className='show-list--show-date'>{show_date}</div>
                     <div className='show-list--img-wrapper'>
                         <img className='show-list--img' src={`${pictureUrl}${picture_name}`}/>

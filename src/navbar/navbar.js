@@ -11,15 +11,15 @@ export default class Navbar extends React.Component {
             <div className='navigation-bar'>
                 <div id='logo-wrapper'>
                     <Link to='/'>
-                        <img src='./public/jazzicon-golden.png'/>
+                        <img src='/public/jazzicon-golden.png'/>
                     </Link>
                 </div>
                 <div id='navigation-menu-wrapper'>
                     <ul id='site-navigation'>
-                        <li className='navigation-menu-item' id='nav-about'>About</li>
-                        <li className='navigation-menu-item' id='nav-program'>Program</li>
-                        <li className='navigation-menu-item' id='nav-gallery'>Gallery</li>
-                        <li className='navigation-menu-item' id='nav-contact'>Contact</li>
+                        <li className='navigation-menu-item'>About</li>
+                        <li className='navigation-menu-item'><Link to='/shows' className='link'>Program</Link></li>
+                        <li className='navigation-menu-item' ><Link to='/gallery' className='link'>Gallery</Link></li>
+                        <li className='navigation-menu-item' >Contact</li>
                     </ul>
                     <ul id='navigation-social'>
                         <li className='social-item' id='twitter-logo'><i className="fa fa-twitter" style={{ariaHidden: 'true'}}></i></li>

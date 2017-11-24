@@ -12,14 +12,20 @@ import AdminLogin from './admin/login';
 import AdminHome from './admin/home';
 import ShowEditor from './admin/show-editor';
 import GalleryManager from './admin/gallery-manager/gallery-manager';
+import ShowPage from './shows-list/show-page';
+import HomePage from './home/home';
+import GalleryListContainer from './gallery/gallery-list-container';
 
 export const store = createStore(reducer, composeWithDevTools(applyMiddleware(reduxPromise, logger)));
 
 const visitorRouter = (
     <Provider store={store}>
         <Router history={browserHistory}>
-            <Route path='/' component={App}/>
+            <Route path='/' component={HomePage}/>
+            <Route path='/shows' component={App}/>
+            <Route path='/shows/:id' component={ShowPage}/>
             <Route path='/login' component={AdminLogin}/>
+            <Route path='/gallery' component={GalleryListContainer}/>
         </Router>
     </Provider>
 );

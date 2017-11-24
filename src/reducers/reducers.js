@@ -112,5 +112,17 @@ export default function(state = {}, action) {
         })
     }
 
+    if(action.type == 'UPDATE_STATE_WITH_SHOW') {
+        state = Object.assign({}, state, {
+            shows: state.shows.map(show => {
+                if(show.id !== action.showInfo.id) {
+                    return show
+                }
+
+                return action.showInfo
+            })
+        })
+    }
+
     return state;
 }

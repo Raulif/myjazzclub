@@ -235,3 +235,11 @@ export function addGalleryPictureToState(newPicture) {
         newPicture
     }
 }
+
+export function updateStateWithShow(showInfo) {
+
+    return {
+        type: 'UPDATE_STATE_WITH_SHOW',
+        showInfo
+    }
+}
