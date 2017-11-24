@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import Navbar from '../navbar/navbar';
 import { Divider } from 'semantic-ui-react';
 import {Link} from 'react-router';
+import Footer from '../footer/footer'
 
 
 
@@ -60,6 +61,7 @@ class ShowPage extends React.Component {
                     </div>
                     <p className='show-page--description'>{show.long_description}</p>
                 </div>
+                <Footer/>
             </div>
         )
     }

@@ -39,9 +39,19 @@ export default class AdminLogin extends React.Component {
         return (
             <div className="admin-login-wrapper">
                 {this.state.error && <div className="warning">Uh oh, that FAILED</div> }
-                <input type="text" name="username" onChange={e => this.inputHandler(e)} placeholder="username: 'admin'"/>
-                <input type="password" name="password" onChange={e => this.inputHandler(e)} placeholder="password: '1234'"/>
-                <button onClick={ () => this.submit() }>Login!</button>
+                <h1 className='login-page-greeting'>THE JAZZ CLUB</h1>
+
+                <div className='login-picture'>
+                    <img src='../public/homeimg.jpg'/>
+                </div>
+                <div className='input-container'>
+                    <h1 className='login-title'>LOGIN TO ACCESS THE ADMIN DASHBOARD</h1>
+                    <div className='input-form'>
+                    <input className='login-input-field' type="text" name="username" onChange={e => this.inputHandler(e)} placeholder="username"/>
+                    <input className='login-input-field' type="password" name="password" onChange={e => this.inputHandler(e)} placeholder="password"/>
+                    <button className='login-form-btn' onClick={ () => this.submit() }>LOGIN</button>
+                    </div>
+                </div>
             </div>
         )
     }

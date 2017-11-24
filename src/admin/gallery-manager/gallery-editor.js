@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { getCurrentPicture, alterCurrentPicture, emptyCurrentPicture, createNewPicture, updatePicture, addGAlleryPictureToState, setCurrentPicture } from '../../actions/actions';
+import { getCurrentPicture, alterCurrentPicture, emptyCurrentPicture, createNewPicture, updatePicture, addGalleryPictureToState, setCurrentPicture } from '../../actions/actions';
 import PictureUploader from './picture-uploader';
 
 
@@ -40,7 +40,8 @@ class GalleryEditor extends React.Component {
         if(this.props.currentPicture.id) {
             console.log('we are UPDATING a picture');
             pictureInfo.id = this.props.currentPicture.id
-            this.props.updatePicture(pictureInfo)
+            this.props.addGalleryPictureToState(pictureInfo)
+
         }
 
     }
@@ -48,6 +49,7 @@ class GalleryEditor extends React.Component {
     setCurrentPictureToState(pictureInfo) {
         this.props.setCurrentPicture(pictureInfo);
     }
+
 
 
 
@@ -120,7 +122,7 @@ const mapDispatchToProps = (dispatch, field, value, currentPicture, pictureInfo)
         emptyCurrentPicture: (currentPicture) => dispatch(emptyCurrentPicture(currentPicture)),
         createNewPicture: (pictureInfo) => dispatch(createNewPicture(pictureInfo)),
         updatePicture: (pictureInfo) => dispatch(updatePicture(pictureInfo)),
-        addGAlleryPictureToState: (currentPicture) => dispatch(addGAlleryPictureToState(currentPicture)),
+        addGalleryPictureToState: (currentPicture) => dispatch(addGalleryPictureToState(currentPicture)),
         setCurrentPicture: (pictureInfo) => dispatch(setCurrentPicture(pictureInfo))
     })
 }

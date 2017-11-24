@@ -28,15 +28,20 @@ class GalleryManager extends React.Component {
             )
         }
 
-        let arrayOfPictures;
+        let sortedArrayOfPictures = this.props.pictures.sort((a, b) => {
+            var c = new Date(a.picture_date)
+            var d = new Date(b.picture_date)
+            return d - c;
+        })
 
+        let finalArray;
         if(this.state.selectedMonth !== '') {
-            arrayOfPictures = this.props.pictures.filter(picture => {
+            finalArray = sortedArrayOfPictures.filter(picture => {
                 return picture.picture_date.slice(0, 7) == this.state.selectedMonth
             })
         }
         else {
-            arrayOfPictures = this.props.pictures
+            finalArray = sortedArrayOfPictures
         }
 
         return(
@@ -46,13 +51,13 @@ class GalleryManager extends React.Component {
 
 
                         <div className='gallery-manager--current-selection'>
-                            <p className='gallery-manager--filter-label'>Total amount of pictures: </p><p className='gallery-manager--filter-results'>{arrayOfPictures.length}</p>
+                            <p className='gallery-manager--filter-label'>Total amount of pictures: </p><p className='gallery-manager--filter-results'>{finalArray.length}</p>
                         </div>
 
                         {this.state.selectedMonth !== '' &&
                         <div className='gallery-manager--current-selection'>
                             <p className='gallery-manager--filter-label'>Pictures in the period selected: </p>
-                            <p className='gallery-manager--filter-results'>{this.props.pictures.length}</p>
+                            <p className='gallery-manager--filter-results'>{finalArray.length}</p>
                         </div>}
 
                         <select className='gallery-manager--dropdown' onChange={(e) => this.changeHandler(e)}>
@@ -65,7 +70,7 @@ class GalleryManager extends React.Component {
                     </div>
                     <div className='gallery-manager--workspace'>
                         <GalleryEditor />
-                        <Gallery pictures={arrayOfPictures} setCurrentPicture={this.props.setCurrentPicture} />
+                        <Gallery pictures={finalArray} setCurrentPicture={this.props.setCurrentPicture} />
                     </div>
                 </div>
             </div>
