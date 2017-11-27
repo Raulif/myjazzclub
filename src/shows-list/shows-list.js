@@ -3,19 +3,25 @@ import { Link } from 'react-router';
 
 export default function ShowsList(props){
     const {shows} = props;
+
     if(!shows){
         return null
     }
 
-    console.log(props.shows);
-
     const listOfShows = props.shows.map(show => {
+
         let {id,
             title,
             time_begin,
             picture_name,
         } = show
+
+        /*
+        We slice out the first 10 characters of the show_date property (YYYY-MM-DD),
+        to make sure we only display the date and not the hour.
+        */
         let show_date = show.show_date.slice(0, 10)
+
         let pictureUrl = 'https://s3.amazonaws.com/myjazzclubbucket/'
 
         return(

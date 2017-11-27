@@ -11,6 +11,7 @@ export default function Gallery(props) {
         let pictureUrl = 'https://s3.amazonaws.com/myjazzclubbucket/'
 
         const clickHandler = (e) => {
+            //the clicked picture becomes the current picture in the Redux state.
             props.setCurrentPicture(picture)
         }
 

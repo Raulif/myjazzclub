@@ -22,11 +22,13 @@ export default class PictureUploader extends React.Component {
         .then(({data}) => {
             if(data.success) {
 
+                //we retrieve the ID of the picture, as assigned by the db
                 const newPicture = {
                     file_name: data.file_name,
                     id: data.id
                 }
 
+                //the picture uploaded is set as current picture in Redux state.
                 this.props.setCurrentPictureToState(newPicture)
             }
         })

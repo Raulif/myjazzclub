@@ -11,7 +11,8 @@ class GalleryListContainer extends React.Component {
     }
 
     componentDidMount() {
-        console.log('componentDidMount');
+        /*on mount we retrieve list of gallery pictures from db and they are
+        set to the Redux state object*/
         this.props.getAllPictures()
     }
 

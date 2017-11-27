@@ -3,9 +3,8 @@ import axios from 'axios';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { getAllCurrentShows } from '../actions/actions';
-import ShowEditor from './show-editor';
+import ShowEditor from './show-editor/show-editor';
 import GalleryManager from './gallery-manager/gallery-manager';
-import { Button, Icon } from 'semantic-ui-react'
 
 
 class AdminHome extends React.Component {
@@ -21,11 +20,18 @@ class AdminHome extends React.Component {
     }
 
     componentDidMount() {
+        //on mount we get all current shows for the 'Show Editor'
         this.props.getAllCurrentShows();
 
     }
 
     toggleEditor() {
+        /*
+        clicking the toggler button we change the local state value of 'shows' and
+        'gallery'. The one which is 'true' will be displayed. The value of
+        'buttonText' is the HTML content of the button. It shows the action which
+        will happen on click.
+        */
         if(this.state.shows) {
             this.setState({
                 shows: false,

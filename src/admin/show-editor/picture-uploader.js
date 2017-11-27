@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 
+
 export default class PictureUploader extends React.Component {
     constructor(props){
         super(props),
@@ -14,18 +15,25 @@ export default class PictureUploader extends React.Component {
     submit() {
         let formData = new FormData();
         formData.append('file', this.state.pictureFile);
-        console.log('this state pictureFile: ', this.state.pictureFile);
+
+        /*
+        Upload show picture to the database on the row with the ID of a show being edited
+        currently.
+        */
 
         axios.post(`/admin/upload-picture/${this.props.currentShowId}`, formData )
 
         .then(({data}) => {
-            console.log('data: ', data);
+
             if(data.success) {
 
-                console.log('data on picture-upload: ', data);
                 const showId = this.props.currentShowId;
                 const picture_name = data.picture_name;
+
+                //update Redux state of current show with the picture name
                 this.props.updateCurrentShowWithPictureName(picture_name);
+
+                //update Redux state of general show list with the picture name
                 this.props.updateStateWithPictureName(picture_name, showId);
             }
         })
@@ -36,7 +44,9 @@ export default class PictureUploader extends React.Component {
 
         if(this.props.visible == false) {
             return null
-        } else {
+        }
+        else {
+            
             return (
                 <div className='picture-uploader-wrapper'>
                     <div className='picture-uploader'>

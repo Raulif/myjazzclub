@@ -1,7 +1,5 @@
 
-/*
-////// SHOW EDITOR ///////
-*/
+/*----------------SHOW EDITOR-------------------------------------------------*/
 
 
 .show-editor--main-wrapper {
@@ -49,6 +47,10 @@
     color: #656076;
 }
 
+
+/*------------SHOW EDITOR - INPUT FORM----------------------------------------*/
+
+
 .show-editor--textarea-wrapper {
     font-size: 15px;
     padding-top: 10px;
@@ -66,7 +68,6 @@
     font-weight: 700;
 
 }
-
 
 .show-editor--textarea {
     border-style: none;
@@ -86,6 +87,10 @@
 .show-editor--textarea:hover {
     border: 1px solid #5C2751;
 }
+
+/*
+INPUT FIELDS:
+*/
 
 .title {
     width: 100%;
@@ -107,10 +112,10 @@
     width: 53%;
 }
 
- .p-secondary-artist{
-     display: inline-block;
-     width: 45%;
- }
+.p-secondary-artist{
+ display: inline-block;
+ width: 45%;
+}
 
 .line-up{
     width: 100%;
@@ -211,6 +216,9 @@
     display: inline-block;
 }
 
+/*
+SHOW IMAGE:
+*/
 
 .show-editor--img-wrapper {
     width: 63%;
@@ -227,6 +235,10 @@
     height: 100%;
     object-fit: cover;
 }
+
+/*
+SUBMIT BUTTON
+*/
 
 .show-editor--submit-btn {
     height: 50px;
@@ -249,6 +261,10 @@
     background-color: #0D0628;
     color: #F6F5FC;
 }
+
+/*
+PICTURE UPLOADER:
+*/
 
 .picture-uploader {
     width: 69%;
@@ -298,10 +314,7 @@
 }
 
 
-/*
-////// LIST OF SHOWS //////
-*/
-
+/*--------------LIST OF SHOWS-------------------------------------------------*/
 
 #admin-shows-container {
     width: 40%;
@@ -314,6 +327,10 @@
 #admin-shows-container h1 {
     margin-bottom: 30px;
 }
+
+/*
+DROPDOWN:
+*/
 
 .admin-shows--current-selection{
     font-size: 14px;
@@ -349,13 +366,17 @@
 
 select.admin-shows--dropdown {
     display: inline-block;
-
     width: 100px;
     text-align: center;
     font-family: 'Source Sans Pro', sans-serif;
-    right: 0;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    float: right;
 }
 
+/*
+LIST OF SHOWS:
+*/
 
 #admin-show-list {
     padding: 0;

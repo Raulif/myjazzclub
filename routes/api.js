@@ -2,7 +2,15 @@ const router = require('express').Router();
 const db = require('../modules/db-queries');
 const { getToday } = require('../utils/helper-functions')
 
+
+//GET THE LIST OF SHOWS FOR THE FRONT WEBSITE
+
 router.get('/shows/', (req, res) => {
+
+    /*
+    We use today's date on the db query to retrieve shows with a date later than
+    today.
+    */
 
     const today = getToday()
 
@@ -14,10 +22,5 @@ router.get('/shows/', (req, res) => {
                 console.log('error on // ROUTES // API // QUERY GET CURRENT ALL SHOWS: ', err);
             })
 })
-
-router.post('/shows/', (req, res)=> {
-    res.json({success: true})
-})
-
 
 module.exports = router

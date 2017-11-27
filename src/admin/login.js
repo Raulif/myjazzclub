@@ -13,18 +13,23 @@ export default class AdminLogin extends React.Component {
 
     submit() {
         if(!this.username || !this.password) {
+            /*'error' in local state is set to true if the user forgets to enter
+            either user-name or password*/
             this.setState({error: true})
         }
         axios.post('/auth/login', {
+            //we send the user input for basic authentification.
             username: this.username,
             password: this.password
         })
 
         .then(({data}) => {
+
             if (data.success) {
-                console.log('auth/login/query came with: ', data.success);
+                //if login has success the user is sent to the Admin Dashboard.
                 location.replace('/admin')
             }
+
             else {
                 this.setState({
                     error: true

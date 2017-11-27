@@ -1,4 +1,6 @@
 const getToday = () => {
+    //getToday returns today's date as 'today' with format 'YYYY-MM-DD'
+
     var today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth()+1; //January is 0!
@@ -12,6 +14,5 @@ const getToday = () => {
     today = yyyy + '-' + mm + '-' + dd;
     return today
 }
-
 
 module.exports.getToday = getToday

@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+/*-------------------- REDUX ACTION CREATORS ---------------------------------*/
 
 
 export function getAllCurrentShows() {
@@ -17,7 +18,9 @@ export function getAllCurrentShows() {
         .catch(err => console.log("error on // ACTIONS // GET ALL CURRENT SHOWS", err));
 }
 
+
 export function getCurrentShow() {
+
     return axios.get('/admin/current-show')
 
             .then(({data}) => {
@@ -31,7 +34,9 @@ export function getCurrentShow() {
             })
 }
 
+
 export function setCurrentShow(currentShow) {
+
     return {
         type: 'SET_CURRENT_SHOW',
         currentShow
@@ -39,6 +44,7 @@ export function setCurrentShow(currentShow) {
 }
 
 export function alterCurrentShow(field, value) {
+
     return{
         type: 'CURRENT_SHOW_FIELD_CHANGE',
         field,
@@ -47,7 +53,7 @@ export function alterCurrentShow(field, value) {
 }
 
 export function alterCurrentPicture(field, value) {
-    console.log('in alter current picture with field: ', field, ' and value: ', value);
+
     return{
         type: 'CURRENT_PICTURE_FIELD_CHANGE',
         field,
@@ -78,12 +84,12 @@ export function emptyCurrentShow() {
     THE LACK OF ID WILL HELP US DIFFERENTIATE A NEW SHOW FROM AN UPDATED SHOW.
     THE NEW SHOW IS THAT WHICH IS PRECEEDED BY A CLEARING OF THE FORM.*/
 
-    console.log('about to return action inside empty currenty state');
     return {
         type: 'EMPTY_CURRENT_SHOW',
         emptyShow
     }
 }
+
 
 export function emptyCurrentPicture() {
     let emptyPicture = {
@@ -104,6 +110,7 @@ export function emptyCurrentPicture() {
     }
 }
 
+
 export function createNewShow(showInfo) {
     console.log('inside action createNewShow: ', showInfo);
     return {
@@ -112,24 +119,30 @@ export function createNewShow(showInfo) {
     }
 }
 
+
 export function createNewPicture(pictureInfo) {
     return axios.post('/admin/gallery/new-picture', pictureInfo)
 
     .then( ({data}) => {
         if(data.success) {
-            //In order to update state.currentShow we use the 'newShow' returned from the server inside the 'data' obj, instead of the 'showInfo' we passed to the server with the POST query. Reason for this is, the 'newShow' returned from the server after the query includes property 'id' as created by the DB when inserting the new row.
-
+            /*
+            In order to update state.currentShow we use the 'newShow' returned
+            from the server inside the 'data' obj, instead of the 'showInfo' we
+            passed to the server with the POST query. Reason for this is, the
+            'newShow' returned from the server after the query includes property
+            'id' as created by the DB when inserting the new row.
+            */
             return {
                 type: 'SET_NEW_PICTURE',
                 newPicture: data.newPicture
             }
         }
     })
-
 }
 
+
 export function updateShow(showInfo) {
-    console.log('showinfo: ', showInfo);
+
     return axios.post('/admin/update-show', showInfo)
 
     .then( ({data}) => {
@@ -163,7 +176,6 @@ export function updatePicture(pictureInfo) {
 
 
 export function addShowToProps(currentShow) {
-    console.log('inside action addShowToProps: ', currentShow);
 
     return {
         type: 'ADD_SHOW_TO_PROPS',
@@ -172,13 +184,16 @@ export function addShowToProps(currentShow) {
 }
 
 export function updateCurrentShowWithPictureName(picture_name) {
+
     return {
         type: 'UPDATE_CURRENT_SHOW_WITH_PICTURE_NAME',
         picture_name
     }
 }
 
+
 export function updateStateWithPictureName(picture_name, showId) {
+
     return {
         type: 'UPDATE_STATE_WITH_PICTURE_NAME',
         picture_name,
@@ -186,6 +201,7 @@ export function updateStateWithPictureName(picture_name, showId) {
 
     }
 }
+
 
 export function getAllPictures() {
 
@@ -220,6 +236,7 @@ export function getCurrentPicture() {
     })
 }
 
+
 export function setCurrentPicture(currentPicture) {
 
     return {
@@ -228,6 +245,7 @@ export function setCurrentPicture(currentPicture) {
     }
 }
 
+
 export function addGalleryPictureToState(newPicture) {
 
     return {
@@ -235,6 +253,7 @@ export function addGalleryPictureToState(newPicture) {
         newPicture
     }
 }
+
 
 export function updateStateWithShow(showInfo) {
 

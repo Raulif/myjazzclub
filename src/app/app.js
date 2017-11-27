@@ -14,6 +14,7 @@ class App extends React.Component {
     }
 
     componentDidMount() {
+        //on mount we retrieve the list of shows from db
         this.props.getAllCurrentShows()
     }
 

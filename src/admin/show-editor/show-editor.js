@@ -1,13 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import { updateStateWithPictureName,updateCurrentShowWithPictureName, getCurrentShow, setCurrentShow, alterCurrentShow, emptyCurrentShow, updateShow, updateStateWithShow } from '../actions/actions';
-import {postNewShow} from '../utils/ajax'
+import { updateStateWithPictureName,updateCurrentShowWithPictureName, getCurrentShow, setCurrentShow, alterCurrentShow, emptyCurrentShow, updateShow, updateStateWithShow } from '../../actions/actions';
+import {postNewShow} from '../../utils/ajax'
 import AdminShowListContainer from './admin-show-list-container';
-import PictureUploader from '../../modules/picture-uploader';
-import { Input, Divider, Form, Label } from 'semantic-ui-react'
-
-
+import PictureUploader from './picture-uploader';
 
 class ShowEditor extends React.Component {
     constructor(props){
@@ -17,19 +14,34 @@ class ShowEditor extends React.Component {
     }
 
     componentDidMount() {
+        /*on mount we retrieve the show to be displayed as editable*/
         this.props.getCurrentShow()
     }
 
     inputHandler(e) {
+        /*
+        the content of the input fields is sent to update Redux state on each
+        key stroke. It becomes the content of the 'current show' object.
+        */
         this.props.alterCurrentShow(e.target.name, e.target.value)
     }
 
     clickHandlerEmptyForm(currentShow) {
+        /*on click we clear the 'current show' of the Redux state and remove the
+        ID field, allowing the creation of a new db entry, next time submit is
+        clicked.*/
         this.props.emptyCurrentShow(currentShow)
     }
 
     submit() {
 
+        /*
+        we store all the data of the input fields in an object called showInfo,
+        as stored in the 'current show' object of Redux state. If one of these
+        fields is empty (no input was entered), the property will be an empty string.
+        This way we make sure we always send the same amount of properties to
+        update the db.
+        */
         const showInfo = {
             title: this.props.currentShow.title || '',
             main_artist: this.props.currentShow.main_artist || '',
@@ -47,14 +59,20 @@ class ShowEditor extends React.Component {
             picture_name: this.props.currentShow.picture_name || ''
         }
 
+        /*
+        If 'current show' on Redux state has no ID property, it means we are
+        creating a new show.
+        */
         if(!this.props.currentShow.id) {
-            console.log('we are posting NEW show');
             delete showInfo.picture_name
             postNewShow(showInfo)
         }
 
         else {
-            console.log('we are UPDATING show');
+            /*
+            if 'current show' has ID, it means we are updating an existing show.
+            we update the db as well as the Redux state array of shows.
+            */
             showInfo.id = this.props.currentShow.id;
             this.props.updateShow(showInfo)
             this.props.updateStateWithShow(showInfo)

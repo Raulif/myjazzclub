@@ -1,6 +1,5 @@
 import React from 'react';
 import ShowsList from './shows-list';
-// import 'shows-list.css';
 
 
 export default class ShowsContainer extends React.Component {
@@ -20,6 +19,11 @@ export default class ShowsContainer extends React.Component {
         let filteredArrayOfShows;
 
         if(this.state.selectedMonth !== '') {
+            /*
+            We filter the array of 'shows' of props according to show_date property
+            using the 'selected month' of local state, which is set by the <select>
+            tag
+            */
             filteredArrayOfShows = this.props.shows.filter(show => {
                 return show.show_date.slice(0, 7) == this.state.selectedMonth
 
@@ -27,6 +31,9 @@ export default class ShowsContainer extends React.Component {
         }
 
         else {
+            /*if no month is set to local state, the array of shows to be rendered
+            is the array of shows retrieved from db.
+            */
             filteredArrayOfShows = this.props.shows
         }
 
