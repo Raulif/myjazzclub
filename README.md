@@ -109,3 +109,12 @@ Here is where we can upload new pictures of past shows, which will be displayed 
 In order to **upload a new picture** we just need to click on the button "New Picture", select a picture and edit its description. After saving it, the image and its additional information will be sent to the data base and displayed on the Gallery section of the home page.
 
 ![myjazzclub-gallery-manager-new-pic](https://github.com/Raulif/myjazzclub/blob/master/public/README-gifs/myjazzclub-gallery-manager-new-pic.gif)
+
+
+
+# Contact
+
+- Email: raul4cade@gmail.com
+- Twitter: [@raulif](#https://twitter.com/raulif)
+- LinkedIn: [Raul Iglesias](#https://www.linkedin.com/in/raul-iglesias-fourcade/)
+
