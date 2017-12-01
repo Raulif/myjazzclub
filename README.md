@@ -42,7 +42,7 @@ The **landing page** presents a panoramic view of the club, with the page title 
 
 
 
-Through the *Program* link we access the **Program Page** dispalying the list of current shows programmed in the club. Each show card displays the date of the event, the picture of the artist and the title of the event. 
+Through the *Program* link we access the **Program Page** dispalying the list of current shows programmed in the club. Each show card displays the date of the event, the picture of the artist and the title of the event.
 
 ![myjazzclub-program](https://github.com/Raulif/myjazzclub/blob/master/public/README-gifs/myjazzclub-program.gif)
 
@@ -110,11 +110,8 @@ In order to **upload a new picture** we just need to click on the button "New Pi
 
 ![myjazzclub-gallery-manager-new-pic](https://github.com/Raulif/myjazzclub/blob/master/public/README-gifs/myjazzclub-gallery-manager-new-pic.gif)
 
-
-
 # Contact
 
 - Email: raul4cade@gmail.com
 - Twitter: [@raulif](#https://twitter.com/raulif)
 - LinkedIn: [Raul Iglesias](#https://www.linkedin.com/in/raul-iglesias-fourcade/)
-
