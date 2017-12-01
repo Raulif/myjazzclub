@@ -8,6 +8,7 @@ const multer = require('multer')
 const uidSafe = require('uid-safe')
 const toS3 = require('../modules/toS3').toS3;
 
+//Multer saves files with size of up to 6MB to the local 'uploads' folder
 
 let diskStorage = multer.diskStorage({
     destination: function (req, file, callback) {
@@ -29,7 +30,7 @@ let uploader = multer({
 
 
 
-//FILTER NOT LOGGED IN
+//FILTER IF NOT LOGGED IN
 
 router.get('/', (req, res) => {
     if(!req.session.admin) {
@@ -38,6 +39,9 @@ router.get('/', (req, res) => {
         res.sendFile(path.resolve(__dirname + '/../index.html'));
     }
 });
+
+
+//------------------ SHOW / SHOW EDITOR ROUTES -------------------------------//
 
 
 //GET CURRENT SHOW FROM DB
@@ -80,18 +84,7 @@ router.post('/new-show', (req, res) => {
 })
 
 
-//POST NEW PICTURE TO GALLERY TABLE
-
-// router.post('/gallery/new-picture', (req, res) => {
-//
-//     const newPicture = req.body
-//
-//     return db.createNewPicture(newPicture)
-// })
-
-
-
-//POST UPDATE EXISTING SHOW
+//UPDATE EXISTING SHOW
 
 router.post('/update-show', (req, res) => {
 
@@ -113,32 +106,11 @@ router.post('/update-show', (req, res) => {
             .catch(err => console.log('error on ROUTES // ADMIN // UPDATE SHOW: ', err))
 })
 
-
-//POST UPDATE CURRENT PICTURE
-
-router.post('/gallery/update-picture', (req, res) => {
-    const updatedPicture = req.body;
-
-    return db.updatePicture(updatedPicture)
-
-            .then(result => {
-                if(result.success) {
-                    res.json({
-                        success: true,
-                        updatedPicture
-                    })
-                }
-            })
-            .catch(err => console.log('error on ROUTES // ADMIN // UPDATE PICTURE: ', err))
-})
-
-
-
-// POST UPLOAD NEW SHOW PICTURE
+// UPLOAD NEW SHOW PICTURE
 
 router.post('/upload-picture/:currentShowId', uploader.single('file'), (req, res) => {
     const currentShowId = req.params.currentShowId
-    console.log('req.file: ', req.file);
+
     if(req.file) {
         toS3(req.file)
 
@@ -162,11 +134,37 @@ router.post('/upload-picture/:currentShowId', uploader.single('file'), (req, res
 
 })
 
+
+
+//------------------ GALLERY / GALLERY MANAGER ROUTES ------------------------//
+
+
+//UPDATE CURRENT PICTURE AND ITS INFO
+
+router.post('/gallery/update-picture', (req, res) => {
+
+    const updatedPicture = req.body;
+
+    return db.updatePicture(updatedPicture)
+
+            .then(result => {
+                if(result.success) {
+                    res.json({
+                        success: true,
+                        updatedPicture
+                    })
+                }
+            })
+
+            .catch(err => console.log('error on ROUTES // ADMIN // UPDATE PICTURE: ', err))
+})
+
+
 //POST UPLOAD NEW GALLERY PICTURE
 
 router.post('/gallery/upload-new-picture', uploader.single('file'), (req, res) => {
     if(req.file) {
-        console.log('req.file: ', req.file);
+
         toS3(req.file)
 
         .then(() => {

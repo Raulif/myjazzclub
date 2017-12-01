@@ -7,6 +7,7 @@ const { toS3 } = require('./toS3');
 const uidSafe = require('uid-safe')
 
 
+// MULTER
 
 const diskStorage = multer.diskStorage({
     destination: function (req, file, callback) {
@@ -18,6 +19,7 @@ const diskStorage = multer.diskStorage({
       });
     }
 });
+
 const uploader = multer({
     storage: diskStorage,
     limits: {
@@ -51,7 +53,10 @@ module.exports.getAllCurrentShows = (today) => {
             })
 }
 
-// ADMIN LOGIN
+/*
+ADMIN LOGIN
+retrieve the admin info from the db, which matches the username entered by the user
+*/
 
 module.exports.getAdminInfo = (username) => {
     const query = `SELECT   *
@@ -60,6 +65,7 @@ module.exports.getAdminInfo = (username) => {
 
     return db.query(query, [username])
 
+            //we retrieve whatever results come from the query. It could be none as well.
             .then(results => {
                 return results.rows[0]
             })
@@ -70,7 +76,11 @@ module.exports.getAdminInfo = (username) => {
 }
 
 
-//GET LAST CURRENT SHOW (show with highest id)
+/*
+GET LAST SHOW STORED (show with highest ID#)
+Last show stored is the default 'current show' when the Admin Dashboard page
+is first loaded. It will appear on the left side on the Show Editor.
+*/
 
 module.exports.getCurrentShow = () => {
     const query = `SELECT *
@@ -84,6 +94,12 @@ module.exports.getCurrentShow = () => {
             .then(results => {
                 let currentShow = results.rows[0];
                 delete currentShow.created_at;
+
+                /*
+                The date format as returned by the db contains hour and seconds
+                which are not relevant to us. We change the date to ISO format
+                and cut out a string with the first 10 characters : YYYY-MM-DD.
+                */
                 currentShow.show_date = currentShow.show_date.toISOString().substring(0, 10);
 
                 return currentShow;
@@ -139,7 +155,7 @@ module.exports.createNewShow = (newShow) => {
 }
 
 
-//UPDATE EXISTING SHOW
+//UPDATE AN EXISTING SHOW
 
 module.exports.updateShow = (updatedShow) => {
     const query = `UPDATE shows
@@ -161,8 +177,8 @@ module.exports.updateShow = (updatedShow) => {
 
     const params = Object.keys(updatedShow).map((keyName, keyIndex) => {
                         return updatedShow[keyName]
-                    // use keyName to get current key's name
-                    // and obj[keyName] to get its value
+                    /* use keyName to get current key's name in the object
+                    and obj[keyName] to get its value*/
                     })
 
 
@@ -178,7 +194,7 @@ module.exports.updateShow = (updatedShow) => {
 }
 
 
-//UPDATE EXISTING GALLERY PICTURES
+//UPDATE AN EXISTING GALLERY PICTURE
 
 module.exports.updatePicture = (updatedPicture) => {
 
@@ -199,10 +215,10 @@ module.exports.updatePicture = (updatedPicture) => {
             })
 }
 
-//UPDATE-UPLOAD SHOW PICTURE
+//UPDATE OR UPLOAD A SHOW PICTURE
 
 module.exports.uploadPicture = (filename, currentShowId) => {
-    console.log('in uploadpicture query');
+
     const query = `UPDATE shows
                     SET picture_name = $1
                     WHERE id = $2`
@@ -232,6 +248,11 @@ module.exports.getPictures = () => {
             .then((results) => {
                 let pictures = results.rows.map( picture => {
                     if(picture.picture_date){
+                        /*
+                        The date format as returned by the db contains hour and seconds
+                        which are not relevant to us. We change the date to ISO format
+                        and cut out a string with the first 10 characters : YYYY-MM-DD.
+                        */
                         picture.picture_date = picture.picture_date.toISOString().substring(0, 10)}
 
                     return picture
@@ -247,7 +268,9 @@ module.exports.getPictures = () => {
 }
 
 
-//GET CURRENT PICTURE
+/*GET CURRENT GALLERY PICTURE (picture with highest ID#)
+Last gallery picture stored is the default 'current picture' when the Admin Dashboard page is first loaded. It will appear on the left side on the Gallery Manager.
+*/
 
 module.exports.getCurrentPicture = () => {
 
@@ -265,6 +288,13 @@ module.exports.getCurrentPicture = () => {
                     let currentPicture = results.rows[0]
 
                     if(currentPicture.picture_date) {
+
+                        /*
+                        The date format as returned by the db contains hour and seconds
+                        which are not relevant to us. We change the date to ISO format
+                        and cut out a string with the first 10 characters : YYYY-MM-DD.
+                        */
+
                         currentPicture.picture_date = currentPicture.picture_date.toISOString().substring(0, 10)
                     }
 
@@ -280,7 +310,7 @@ module.exports.getCurrentPicture = () => {
 }
 
 
-//CREATE NEW GALLERY PICTURE
+//POST A NEW GALLERY PICTURE
 
 module.exports.createNewGalleryPicture = (fileName) => {
 

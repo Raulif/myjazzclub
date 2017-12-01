@@ -10,7 +10,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import logger from 'redux-logger';
 import AdminLogin from './admin/login';
 import AdminHome from './admin/home';
-import ShowEditor from './admin/show-editor';
+import ShowEditor from './admin/show-editor/show-editor';
 import GalleryManager from './admin/gallery-manager/gallery-manager';
 import ShowPage from './shows-list/show-page';
 import HomePage from './home/home';
@@ -18,6 +18,8 @@ import GalleryListContainer from './gallery/gallery-list-container';
 
 export const store = createStore(reducer, composeWithDevTools(applyMiddleware(reduxPromise, logger)));
 
+
+//Visitor-Router serves the 'commercial' part of the website
 const visitorRouter = (
     <Provider store={store}>
         <Router history={browserHistory}>
@@ -30,6 +32,7 @@ const visitorRouter = (
     </Provider>
 );
 
+//Admin-Router serves Admin Dashboard once the user is logged in
 const adminRouter = (
     <Provider store={store}>
         <Router history={browserHistory}>
@@ -37,6 +40,8 @@ const adminRouter = (
         </Router>
     </Provider>
 )
+
+//we decide which router to serve according to the url.
 let router = location.pathname === '/admin' ? adminRouter : visitorRouter;
 
 
@@ -44,5 +49,3 @@ ReactDOM.render(
     router,
     document.querySelector('main')
 );
-
-// let router = location.pathname === '/welcome' ? notLoggedInRouter : loggedInRouter;

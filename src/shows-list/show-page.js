@@ -1,5 +1,4 @@
 import React from 'react';
-import { browserHistory } from 'react-router';
 import {connect} from 'react-redux';
 import Navbar from '../navbar/navbar';
 import { Divider } from 'semantic-ui-react';
@@ -23,6 +22,8 @@ class ShowPage extends React.Component {
         }
 
         const selectedShow = this.props.shows.filter(show => {
+            /*We filter the array of 'shows' from props with the #ID of params,
+            to get the show which will be rendered*/
             return show.id == this.props.params.id
         })
 
@@ -35,29 +36,29 @@ class ShowPage extends React.Component {
             <div className='show-page-container'>
                 <Navbar/>
                 <div className='logo-wrapper'>
-                <Link to='/'>
-                <img src='/public/jazzicon-sand.png' className='navbar-logo'/>
-                </Link>
+                    <Link to='/'>
+                    <img src='/public/jazzicon-sand.png' className='navbar-logo'/>
+                    </Link>
                 </div>
                 <div className='show-page-wrapper'>
                     <h1 className='show-page--show-title'>{show.title}</h1>
                     <Divider />
                     <div className='show-page--text-wrapper'>
-                    <p className='show-page--show-lable'>Event date:</p><p className='show-page--show-value'>{show.show_date}</p>
+                        <p className='show-page--show-lable'>Event date:</p><p className='show-page--show-value'>{show.show_date}</p>
                     </div>
                     <div className='show-page--text-wrapper'>
-                    <p className='show-page--show-lable'>Time:</p><p className='show-page--show-value'>{show.time_begin} hrs</p>
+                        <p className='show-page--show-lable'>Time:</p><p className='show-page--show-value'>{show.time_begin} hrs</p>
                     </div>
                     <div className='show-page--text-wrapper'>
-                    <p className='show-page--show-lable'>Price:</p><p className='show-page--show-value'>{show.price_pre} €</p>
-                    <button className='ticket-btn'>Ticket</button>
+                        <p className='show-page--show-lable'>Price:</p><p className='show-page--show-value'>{show.price_pre} €</p>
+                        <button className='ticket-btn'>Ticket</button>
                     </div>
                     <Divider />
                     <div className='show-page--img-wrapper'>
-                    <img className='show-page--img' src={`${pictureUrl}${show.picture_name}`}/>
+                        <img className='show-page--img' src={`${pictureUrl}${show.picture_name}`}/>
                     </div>
                     <div className='show-page--artist-wrapper'>
-                    <h3 className='show-page--artist-value'>{show.main_artist}</h3>
+                        <h3 className='show-page--artist-value'>{show.main_artist}</h3>
                     </div>
                     <p className='show-page--description'>{show.long_description}</p>
                 </div>

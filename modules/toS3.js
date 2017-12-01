@@ -1,5 +1,9 @@
 const knox = require('knox');
 
+/*
+This module allows uploading pictures onto AWS-S3 for online storage.
+*/
+
 let secrets;
 if (process.env.NODE_ENV == 'production') {
     secrets = process.env; // in prod the secrets are environment variables

@@ -12,11 +12,14 @@ class GalleryManager extends React.Component {
     }
 
     componentDidMount() {
-        console.log('componentDidMount');
+        //on mount we retrieve all pictures from db
         this.props.getAllPictures()
     }
 
     changeHandler(e) {
+        /*with the <select> tag we set a selected month on the local state.
+        We will use this month to filter the list of pictures displayed on the
+        Gallery Manager*/
         this.setState({selectedMonth: e.target.value})
     }
 
@@ -28,6 +31,9 @@ class GalleryManager extends React.Component {
             )
         }
 
+        /*We sort the pictures of the gallery according to date. The newest comes
+        first.
+        */
         let sortedArrayOfPictures = this.props.pictures.sort((a, b) => {
             var c = new Date(a.picture_date)
             var d = new Date(b.picture_date)
@@ -36,11 +42,19 @@ class GalleryManager extends React.Component {
 
         let finalArray;
         if(this.state.selectedMonth !== '') {
+            /*
+            if a month is selected, we filter the array of pictures to be displayed
+            with the month selected.
+            */
             finalArray = sortedArrayOfPictures.filter(picture => {
                 return picture.picture_date.slice(0, 7) == this.state.selectedMonth
             })
         }
         else {
+            /*
+            if no month is selected, the array of pictures to be displayed is
+            the array sorted by date.
+            */
             finalArray = sortedArrayOfPictures
         }
 

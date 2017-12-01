@@ -1,6 +1,5 @@
 import React from 'react'
 import AdminShowList from './admin-show-list';
-import { Dropdown } from 'semantic-ui-react';
 
 
 export default class AdminShowListContainer extends React.Component {
@@ -9,7 +8,14 @@ export default class AdminShowListContainer extends React.Component {
         this.state = {selectedMonth: ''}
     }
 
+    //'Selected month' is used to filter the list of shows
+
     changeHandler(e) {
+
+        /*
+        The <select> dropdown sets a value to 'selected month' on the local state.
+        This value will be used to filter the array of shows displayed.
+        */
         this.setState({selectedMonth: e.target.value})
     }
 
@@ -19,14 +25,29 @@ export default class AdminShowListContainer extends React.Component {
                 <div>LOADING LIST OF SHOWS</div>
             )
         }
+
+        /*
+        Before rendering we filter the array of shows according to date.
+        Show with earliest date comes first.
+        */
         let sortedArrayOfShows = this.props.shows.sort((a, b) => {
             var c = new Date(a.show_date);
             var d = new Date(b.show_date);
             return c - d;
         })
+
         let finalArray
         if(this.state.selectedMonth !== '') {
             finalArray = sortedArrayOfShows.filter(show => {
+
+                /*
+                We use the value of 'selected month' of the local state to filter
+                the current array of shows which is going to be rendered.
+                We slice the value of the date propety (YYYY-MM-DD) down to only
+                the first 7 characters (YYYY-MM) and we compare these with the
+                value of the option selected in the <select> tag.
+                */
+
                 return show.show_date.slice(0, 7) == this.state.selectedMonth
 
             })
@@ -34,6 +55,9 @@ export default class AdminShowListContainer extends React.Component {
         }
 
         else {
+
+            /*if no month is selected, the array of shows to be displayed is the
+            array sorted by date.*/
             finalArray = sortedArrayOfShows
         }
 

@@ -15,16 +15,21 @@ class GalleryEditor extends React.Component {
     }
 
     componentDidMount() {
+        /*
+        on mount we retrieve from the db the last picture uplaoded and set it as
+        'current picture'.
+        */
         this.props.getCurrentPicture()
     }
 
 
     inputHandler(e) {
-        console.log('name is: ', e.target.name, ' and value is: ', e.target.value);
+        //We update the state props of the picture we are editing on each key stroke.
         this.props.alterCurrentPicture(e.target.name, e.target.value)
     }
 
     clickHandlerEmptyForm() {
+        //We clear the form by emptying the state object 'current show'
         this.props.emptyCurrentPicture()
     }
 
@@ -38,8 +43,11 @@ class GalleryEditor extends React.Component {
         }
 
         if(this.props.currentPicture.id) {
-            console.log('we are UPDATING a picture');
+
+            /*If the current picture already has an id (from the db) this means we
+            are updating a picture, instead of creating a new one on the db*/
             pictureInfo.id = this.props.currentPicture.id
+
             this.props.addGalleryPictureToState(pictureInfo)
 
         }
@@ -47,6 +55,7 @@ class GalleryEditor extends React.Component {
     }
 
     setCurrentPictureToState(pictureInfo) {
+        //we set the picture uplaoded as 'current picture' through the Picture Uploader
         this.props.setCurrentPicture(pictureInfo);
     }
 
@@ -68,11 +77,13 @@ class GalleryEditor extends React.Component {
                 <div className='gallery-editor--wrapper'>
 
                 <div className='gallery-editor'>
+
                 {!this.props.currentPicture.id &&
                 <div>
                     <div className='gallery-editor--fallback'>No picture selected</div>
                     <PictureUploader setCurrentPictureToState={this.setCurrentPictureToState} />
-                </div>}
+                </div>
+                }
 
 
                     {this.props.currentPicture.id &&

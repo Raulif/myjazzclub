@@ -7,6 +7,10 @@ body {
     font-weight: 300;
 }
 
+/*
+NAVIGATION BAR
+*/
+
 .navigation-bar {
     width: 100%;
     height: 80px;
@@ -21,6 +25,10 @@ body {
     z-index: 100;
 }
 
+/*
+BACKGROUND IMAGE
+*/
+
 .home-page-bg-img {
     width: 100vw;
     height: 77vh;
@@ -33,23 +41,9 @@ body {
     opacity: 0.8;
 }
 
-.home-page-greeting {
-    font-size: 80px;
-    color: #F1F0CC;
-    font-family: 'Poiret One', cursive;
-    opacity: 1;
-    display: block;
-    index: 200;
-}
-
-.home-page-greeting-wrapper {
-    opacity: 1;
-    index: 200;
-    margin-top: 150px;
-    width: 70vw;
-    position: absolute;
-    text-align: center;
-}
+/*
+LOGO
+*/
 
 #logo-wrapper{
     height: 95%;
@@ -113,6 +107,30 @@ body {
     padding-top: 15px;
 }
 
+/*
+MAIN TITLE
+*/
+
+.home-page-greeting {
+    font-size: 80px;
+    color: #F1F0CC;
+    font-family: 'Poiret One', cursive;
+    opacity: 1;
+    display: block;
+    index: 200;
+}
+
+.home-page-greeting-wrapper {
+    opacity: 1;
+    index: 200;
+    margin-top: 150px;
+    width: 70vw;
+    position: absolute;
+    text-align: center;
+}
+
+/*-----------------------SHOW LIST / PROGRAM----------------------------------*/
+
 .shows-container {
     width: 100%;
     height: 100%;
@@ -164,9 +182,7 @@ body {
     color: #BD3126;
 }
 
-/*
-//// SHOW LIST PROGRAM /////
-*/
+/*----------------------------LIST OF SHOWS-----------------------------------*/
 
 #shows-list {
     margin: 0;
@@ -267,7 +283,7 @@ body {
     color: #C1292E;
 }
 
-
+/*--------------------------------FOOTER--------------------------------------*/
 
 .footer-wrapper {
     margin: 0;
@@ -294,6 +310,8 @@ body {
     margin: 0;
     padding: 0;
 }
+
+/*------------------------------LOGIN AREA------------------------------------*/
 
 .admin-login-wrapper {
     margin: auto;
@@ -328,8 +346,6 @@ body {
     font-weight: 700;
     color: #525352;
 }
-
-
 
 .admin-login-btn {
     width: 8%;
@@ -399,9 +415,7 @@ body {
 }
 
 
-/*
-///// SHOW PAGE /////
-*/
+/*---------------------------INDIVIDUAL SHOW----------------------------------*/
 
 .show-page--show-title {
     font-size: 30px;
@@ -536,9 +550,8 @@ body {
 }
 
 
-/*
-//// GALLERY ////
-*/
+
+/*--------------------------------GALLERY PAGE--------------------------------*/
 
 .gallery-page--title-wrapper {
     width: 100%;
@@ -567,17 +580,17 @@ body {
     width: 33%;
     height: 400px;
     background-image: url('./spiration dark.png');
-
 }
 
 .gallery-list--img-wrapper {
-    width: 32%;
-    height: 405px;
+    width: 31.8%;
+    height: 400px;
     z-index: 7;
     position: absolute;
     margin-top: 0%;
     opacity: 1;
     transition: opacity 0.2s ease;
+    border: 1px solid #ECECEC;
 }
 
 .gallery-list--img-wrapper:hover {
@@ -586,6 +599,7 @@ body {
 }
 
 .gallery-list--img {
+    object-fit: cover;
     width: 100%;
     height: 100%;
 }
@@ -599,17 +613,15 @@ body {
 
 .gallery-list--text-container {
 
-    width: 500px;
+    width: 400px;
     display: flex;
     z-index:;
 
 }
 
-
-
 .gallery-list--text-label{
     font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
-    width: 25%;
+    width: 30%;
     margin-left: 5%;
     color: white;
     font-weight: 100;
