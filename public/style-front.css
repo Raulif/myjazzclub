@@ -399,6 +399,7 @@ MAIN TITLE
 .login-form-btn:hover {
     color: #161D36;
     background-color: #F1F0CC;
+    border: 3px solid #161D36;
 }
 
 
