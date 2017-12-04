@@ -1,6 +1,5 @@
 const spicedPg = require('spiced-pg');
-const { postgresDb } = require('../config/secrets.json')
-const db = spicedPg(process.env.DATABASE_URL || postgresDb);
+const db = spicedPg(process.env.DATABASE_URL || require('../config/secrets.json').postgresDb);
 const multer = require('multer')
 const path = require('path')
 const { toS3 } = require('./toS3');
