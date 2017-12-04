@@ -17,4 +17,4 @@ CREATE TABLE shows (
     line_up VARCHAR,
     title VARCHAR NOT NULL,
     picture_name TEXT
-)
+);
