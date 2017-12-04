@@ -34,7 +34,7 @@ app.use(bodyParser.json())
 
 //Bundler
 if (process.env.NODE_ENV !== 'production') {
-    app.use('/bundle.js', require('http-proxy-middleware')({
+    app.use('/public/bundle.js', require('http-proxy-middleware')({
         target: 'http://localhost:8081/'
     }));
 }
