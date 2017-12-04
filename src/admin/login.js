@@ -52,8 +52,8 @@ export default class AdminLogin extends React.Component {
                 <div className='input-container'>
                     <h1 className='login-title'>LOGIN TO ACCESS THE ADMIN DASHBOARD</h1>
                     <div className='input-form'>
-                    <input className='login-input-field' type="text" name="username" onChange={e => this.inputHandler(e)} placeholder="username"/>
-                    <input className='login-input-field' type="password" name="password" onChange={e => this.inputHandler(e)} placeholder="password"/>
+                    <input className='login-input-field' type="text" name="username" onChange={e => this.inputHandler(e)} placeholder="username - use: 'admin'"/>
+                    <input className='login-input-field' type="password" name="password" onChange={e => this.inputHandler(e)} placeholder="password - use: '1234'"/>
                     <button className='login-form-btn' onClick={ () => this.submit() }>LOGIN</button>
                     </div>
                 </div>
