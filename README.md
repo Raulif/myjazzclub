@@ -39,7 +39,7 @@ I chose it to be jazz themed because I really like this kind of music.
 
 The **landing page** presents a panoramic view of the club, with the page title and a navigation bar containing the usual sections any wbsite of a music club contains (about, program, gallery, contact).
 
-![Screen Shot 2017-12-01 at 14.38.13](https://github.com/Raulif/myjazzclub/blob/master/public/README-gifs/Screen Shot 2017-12-01 at 14.38.13.png)
+![Screen Shot 2017-12-01 at 14.38.13](https://github.com/Raulif/myjazzclub/blob/master/public/README-gifs/Screen%20Shot%202017-12-01%20at%2014.38.13.png)
 
 
 
